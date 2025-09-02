@@ -1,4 +1,4 @@
-package dev.java10x.HobbitCRUD;
+package dev.java10x.HobbitCrud;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
