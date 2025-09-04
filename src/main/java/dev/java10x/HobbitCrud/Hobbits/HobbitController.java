@@ -1,4 +1,4 @@
-package dev.java10x.HobbitCrud;
+package dev.java10x.HobbitCrud.Hobbits;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

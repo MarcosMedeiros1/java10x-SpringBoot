@@ -1,6 +1,9 @@
-package dev.java10x.HobbitCrud;
+package dev.java10x.HobbitCrud.Hobbits;
 
+import dev.java10x.HobbitCrud.Missoes.MissaoModel;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "tb_hobbits")
@@ -11,6 +14,9 @@ public class HobbitModel {
     private String nome;
     private String email;
     private int idade;
+    @ManyToOne
+    @JoinColumn(name = "missao_id")
+    private MissaoModel missoes;
 
     public HobbitModel() {
     }
