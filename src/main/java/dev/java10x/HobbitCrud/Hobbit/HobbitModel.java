@@ -1,6 +1,6 @@
-package dev.java10x.HobbitCrud.Hobbits;
+package dev.java10x.HobbitCrud.Hobbit;
 
-import dev.java10x.HobbitCrud.Missoes.MissaoModel;
+import dev.java10x.HobbitCrud.Mission.MissionModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,16 +14,19 @@ import lombok.NoArgsConstructor;
 public class HobbitModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
-    private String nome;
+    @Column(name = "name")
+    private String name;
 
-    @Column(unique = true)
+    @Column(unique = true, name = "email")
     private String email;
 
-    private int idade;
+    @Column(name = "age")
+    private int age;
 
     @ManyToOne
-    @JoinColumn(name = "missao_id")
-    private MissaoModel missoes;
+    @JoinColumn(name = "mission_id")
+    private MissionModel missions;
 }
