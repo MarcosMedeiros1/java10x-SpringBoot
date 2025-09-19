@@ -3,7 +3,7 @@ package dev.java10x.HobbitCrud.Hobbit;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping
+@RequestMapping("hobbit")
 public class HobbitController {
 
     @GetMapping("/helloWorld")
@@ -13,7 +13,7 @@ public class HobbitController {
 
     // Add Hobbit
     @PostMapping("/create")
-    public String CreateHobbit() {
+    public String createHobbit() {
         return "Created!";
     }
 
