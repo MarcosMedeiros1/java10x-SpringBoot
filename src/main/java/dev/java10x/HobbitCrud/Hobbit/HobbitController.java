@@ -14,11 +14,6 @@ public class HobbitController {
         this.hobbitService = hobbitService;
     }
 
-    @GetMapping("/helloWorld")
-    public String helloWorld() {
-        return "Hello World!";
-    }
-
     // Add Hobbit
     @PostMapping("/create")
     public String createHobbit() {
@@ -32,9 +27,9 @@ public class HobbitController {
     }
 
     // Get Hobbit by ID
-    @GetMapping("/hobbitId")
-    public String getHobbitById() {
-        return "Showing one specific hobbit";
+    @GetMapping("/get/{id}")
+    public HobbitModel getHobbitById(@PathVariable Long id) {
+        return this.hobbitService.getHobbitById(id);
     }
 
     // Update Hobbit data
