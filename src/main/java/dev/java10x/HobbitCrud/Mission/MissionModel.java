@@ -1,5 +1,6 @@
 package dev.java10x.HobbitCrud.Mission;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.java10x.HobbitCrud.Hobbit.HobbitModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -26,5 +27,6 @@ public class MissionModel {
     private String difficulty;
 
     @OneToMany(mappedBy = "missions")
+    @JsonIgnore
     private List<HobbitModel> hobbits;
 }
