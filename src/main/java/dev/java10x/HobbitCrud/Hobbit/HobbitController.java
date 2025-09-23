@@ -2,9 +2,17 @@ package dev.java10x.HobbitCrud.Hobbit;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("hobbit")
 public class HobbitController {
+
+    private HobbitService hobbitService;
+
+    public HobbitController(HobbitService hobbitService) {
+        this.hobbitService = hobbitService;
+    }
 
     @GetMapping("/helloWorld")
     public String helloWorld() {
@@ -19,8 +27,8 @@ public class HobbitController {
 
     // Get Hobbit
     @GetMapping("all")
-    public String getAllHobbits() {
-        return "Showing all hobbits";
+    public List<HobbitModel> getAllHobbits() {
+        return this.hobbitService.getAllHobbits();
     }
 
     // Get Hobbit by ID
