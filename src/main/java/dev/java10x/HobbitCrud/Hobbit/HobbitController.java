@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("hobbit")
+@RequestMapping("hobbits")
 public class HobbitController {
 
-    private HobbitService hobbitService;
+    private final HobbitService hobbitService;
 
     public HobbitController(HobbitService hobbitService) {
         this.hobbitService = hobbitService;
@@ -16,8 +16,8 @@ public class HobbitController {
 
     // Add Hobbit
     @PostMapping("/create")
-    public String createHobbit() {
-        return "Created!";
+    public HobbitModel createHobbit(@RequestBody HobbitModel hobbit) {
+        return this.hobbitService.createHobbit(hobbit);
     }
 
     // Get Hobbit

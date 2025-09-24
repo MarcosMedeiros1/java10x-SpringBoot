@@ -21,4 +21,8 @@ public class HobbitService {
         Optional<HobbitModel> hobbit = hobbitRepository.findById(id);
         return  hobbit.orElse(null);
     }
+
+    public HobbitModel createHobbit(HobbitModel hobbit) {
+        return hobbitRepository.save(hobbit);
+    }
 }
