@@ -25,4 +25,8 @@ public class HobbitService {
     public HobbitModel createHobbit(HobbitModel hobbit) {
         return hobbitRepository.save(hobbit);
     }
+
+    public void deleteHobbitById(Long id) {
+        hobbitRepository.deleteById(id);
+    }
 }

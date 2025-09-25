@@ -39,8 +39,8 @@ public class HobbitController {
     }
 
     // Delete Hobbit
-    @DeleteMapping("/deleteId")
-    public String deleteHobbitById() {
-        return "Deleted!";
+    @DeleteMapping("/delete/{id}")
+    public void deleteHobbitById(@PathVariable Long id) {
+        this.hobbitService.deleteHobbitById(id);
     }
 }
