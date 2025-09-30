@@ -16,8 +16,8 @@ public class HobbitController {
 
     // Add Hobbit
     @PostMapping("/create")
-    public HobbitModel createHobbit(@RequestBody HobbitModel hobbit) {
-        return this.hobbitService.createHobbit(hobbit);
+    public HobbitDTO createHobbit(@RequestBody HobbitDTO hobbitDTO) {
+        return this.hobbitService.createHobbit(hobbitDTO);
     }
 
     // Get Hobbit
@@ -33,9 +33,9 @@ public class HobbitController {
     }
 
     // Update Hobbit data
-    @PutMapping("/updateId")
-    public String updateHobbitById() {
-        return "Updated!";
+    @PutMapping("/update/{id}")
+    public HobbitModel updateHobbit(@PathVariable Long id, @RequestBody HobbitModel hobbit) {
+        return this.hobbitService.updateHobbit(id, hobbit);
     }
 
     // Delete Hobbit

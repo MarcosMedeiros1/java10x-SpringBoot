@@ -8,9 +8,11 @@ import java.util.Optional;
 public class HobbitService {
 
     private HobbitRepository hobbitRepository;
+    private HobbitMapper hobbitMapper;
 
-    public HobbitService(HobbitRepository hobbitRepository) {
+    public HobbitService(HobbitRepository hobbitRepository, HobbitMapper hobbitMapper) {
         this.hobbitRepository = hobbitRepository;
+        this.hobbitMapper = hobbitMapper;
     }
 
     public List<HobbitModel> getAllHobbits() {
@@ -22,11 +24,21 @@ public class HobbitService {
         return  hobbit.orElse(null);
     }
 
-    public HobbitModel createHobbit(HobbitModel hobbit) {
-        return hobbitRepository.save(hobbit);
+    public HobbitDTO createHobbit(HobbitDTO hobbitDTO) {
+        HobbitModel hobbit = hobbitMapper.map(hobbitDTO);
+        hobbit = hobbitRepository.save(hobbit);
+        return hobbitMapper.map(hobbit);
     }
 
     public void deleteHobbitById(Long id) {
         hobbitRepository.deleteById(id);
+    }
+
+    public HobbitModel updateHobbit(Long id, HobbitModel hobbit) {
+        if (hobbitRepository.existsById(id)) {
+            hobbit.setId(id);
+            return hobbitRepository.save(hobbit);
+        }
+        return null;
     }
 }
