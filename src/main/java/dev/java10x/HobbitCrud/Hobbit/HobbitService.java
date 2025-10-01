@@ -3,6 +3,7 @@ package dev.java10x.HobbitCrud.Hobbit;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class HobbitService {
@@ -15,13 +16,16 @@ public class HobbitService {
         this.hobbitMapper = hobbitMapper;
     }
 
-    public List<HobbitModel> getAllHobbits() {
-        return hobbitRepository.findAll();
+    public List<HobbitDTO> getAllHobbits() {
+        List<HobbitModel> hobbits = hobbitRepository.findAll();
+        return hobbits.stream()
+                .map(hobbitMapper::map)
+                .collect(Collectors.toList());
     }
 
-    public HobbitModel getHobbitById(Long id) {
+    public HobbitDTO getHobbitById(Long id) {
         Optional<HobbitModel> hobbit = hobbitRepository.findById(id);
-        return  hobbit.orElse(null);
+        return  hobbit.map(hobbitMapper::map).orElse(null);
     }
 
     public HobbitDTO createHobbit(HobbitDTO hobbitDTO) {
@@ -34,10 +38,13 @@ public class HobbitService {
         hobbitRepository.deleteById(id);
     }
 
-    public HobbitModel updateHobbit(Long id, HobbitModel hobbit) {
-        if (hobbitRepository.existsById(id)) {
-            hobbit.setId(id);
-            return hobbitRepository.save(hobbit);
+    public HobbitDTO updateHobbit(Long id, HobbitDTO hobbitDTO) {
+        Optional<HobbitModel> foundHobbit = hobbitRepository.findById(id);
+        if (foundHobbit.isPresent()) {
+            HobbitModel updatedHobbit = hobbitMapper.map(hobbitDTO);
+            updatedHobbit.setId(id);
+            HobbitModel savedHobbit = hobbitRepository.save(updatedHobbit);
+            return hobbitMapper.map(savedHobbit);
         }
         return null;
     }

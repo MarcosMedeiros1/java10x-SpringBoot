@@ -22,19 +22,19 @@ public class HobbitController {
 
     // Get Hobbit
     @GetMapping("all")
-    public List<HobbitModel> getAllHobbits() {
+    public List<HobbitDTO> getAllHobbits() {
         return this.hobbitService.getAllHobbits();
     }
 
     // Get Hobbit by ID
     @GetMapping("/get/{id}")
-    public HobbitModel getHobbitById(@PathVariable Long id) {
+    public HobbitDTO getHobbitById(@PathVariable Long id) {
         return this.hobbitService.getHobbitById(id);
     }
 
     // Update Hobbit data
     @PutMapping("/update/{id}")
-    public HobbitModel updateHobbit(@PathVariable Long id, @RequestBody HobbitModel hobbit) {
+    public HobbitDTO updateHobbit(@PathVariable Long id, @RequestBody HobbitDTO hobbit) {
         return this.hobbitService.updateHobbit(id, hobbit);
     }
 
