@@ -1,5 +1,7 @@
 package dev.java10x.HobbitCrud.Hobbit;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,31 +18,49 @@ public class HobbitController {
 
     // Add Hobbit
     @PostMapping("/create")
-    public HobbitDTO createHobbit(@RequestBody HobbitDTO hobbitDTO) {
-        return this.hobbitService.createHobbit(hobbitDTO);
+    public ResponseEntity<String> createHobbit(@RequestBody HobbitDTO hobbitDTO) {
+        HobbitDTO newHobbit = hobbitService.createHobbit(hobbitDTO);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body("Hobbit created: " + newHobbit.getName() + " - ID: " + newHobbit.getId());
     }
 
     // Get Hobbit
     @GetMapping("all")
-    public List<HobbitDTO> getAllHobbits() {
-        return this.hobbitService.getAllHobbits();
+    public ResponseEntity<List<HobbitDTO>> getAllHobbits() {
+        List<HobbitDTO> hobbits = hobbitService.getAllHobbits();
+        return ResponseEntity.ok(hobbits);
     }
 
     // Get Hobbit by ID
     @GetMapping("/get/{id}")
-    public HobbitDTO getHobbitById(@PathVariable Long id) {
-        return this.hobbitService.getHobbitById(id);
+    public ResponseEntity<?> getHobbitById(@PathVariable Long id) {
+        HobbitDTO hobbitDTO = hobbitService.getHobbitById(id);
+        if (hobbitDTO == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Hobbit with ID: " + id + " not found.");
+        }
+        return ResponseEntity.ok(hobbitDTO);
     }
 
     // Update Hobbit data
     @PutMapping("/update/{id}")
-    public HobbitDTO updateHobbit(@PathVariable Long id, @RequestBody HobbitDTO hobbit) {
-        return this.hobbitService.updateHobbit(id, hobbit);
+    public ResponseEntity<?> updateHobbit(@PathVariable Long id, @RequestBody HobbitDTO hobbit) {
+        if (hobbitService.getHobbitById(id) == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Hobbit with ID: " + id + " not found.");
+        }
+        HobbitDTO hobbitDTO = hobbitService.updateHobbit(id, hobbit);
+        return ResponseEntity.ok(hobbitDTO);
     }
 
     // Delete Hobbit
     @DeleteMapping("/delete/{id}")
-    public void deleteHobbitById(@PathVariable Long id) {
-        this.hobbitService.deleteHobbitById(id);
+    public ResponseEntity<String> deleteHobbitById(@PathVariable Long id) {
+        if (hobbitService.getHobbitById(id) == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Hobbit with ID: " + id + " not found.");
+        }
+        hobbitService.deleteHobbitById(id);
+        return ResponseEntity.ok("Hobbit with ID: " + id + " deleted.");
     }
 }
