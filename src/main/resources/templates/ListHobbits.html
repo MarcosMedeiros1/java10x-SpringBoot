@@ -1,0 +1,14 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hobbits list</title>
+</head>
+<body>
+<div style="display: grid;">
+    <div th:each="hobbit: ${hobbits}">
+        <span th:text="${hobbit.name}"></span>
+    </div>
+</div>
+</body>
+</html>

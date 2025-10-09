@@ -5,12 +5,14 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(name = "tb_hobbits")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(exclude = "missions")
 public class HobbitModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

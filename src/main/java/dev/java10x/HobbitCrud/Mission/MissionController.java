@@ -3,7 +3,7 @@ package dev.java10x.HobbitCrud.Mission;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("missions")
+@RequestMapping("/missions")
 public class MissionController {
 
     @GetMapping("/all")

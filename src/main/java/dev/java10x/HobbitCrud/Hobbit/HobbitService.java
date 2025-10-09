@@ -8,8 +8,8 @@ import java.util.stream.Collectors;
 @Service
 public class HobbitService {
 
-    private HobbitRepository hobbitRepository;
-    private HobbitMapper hobbitMapper;
+    private final HobbitRepository hobbitRepository;
+    private final HobbitMapper hobbitMapper;
 
     public HobbitService(HobbitRepository hobbitRepository, HobbitMapper hobbitMapper) {
         this.hobbitRepository = hobbitRepository;
