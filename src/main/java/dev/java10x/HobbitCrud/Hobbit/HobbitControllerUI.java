@@ -22,6 +22,6 @@ public class HobbitControllerUI {
     public String getAllHobbits(Model model) {
         List<HobbitDTO> hobbits = hobbitService.getAllHobbits();
         model.addAttribute("hobbits", hobbits);
-        return "ListHobbits";
+        return "ListHobbits"; // Nome do arquivo HTML que será renderizado
     }
 }
